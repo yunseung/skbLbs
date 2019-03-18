@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "817948407826",
+    "firebase_url": "https://skblbs-1b026.firebaseio.com",
+    "project_id": "skblbs-1b026",
+    "storage_bucket": "skblbs-1b026.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:817948407826:android:1ae773f04dcbc720",
+        "android_client_info": {
+          "package_name": "com.neonex.lbs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "817948407826-87ojtd871gc20l0ka07jsigkpd9n8q83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCX7jkqoriEVT6hDVIc4Gy2CCoHLIhUGRM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

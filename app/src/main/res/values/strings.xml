@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">LBS</string>
+    <string name="ble_not_supported">BLE not supported.</string>
+    <string name="and_ver_m_permission_message_1">반드시 다음 작업을 허용 하셔야 합니다!</string>
+    <string name="waiting_msg">잠시만 기다려주세요.</string>
+    <string name="skb_lbs_noti">SKB LBS 알림</string>
+    <string name="scan_noti_guide">업무 차량을 감지하였습니다.\n아래 차량의 운전자가 맞습니까?</string>
+    <string name="car_no">번호 : %1$s</string>
+    <string name="car_name">차종 : %1$s</string>
+    <string name="cancel">아니오</string>
+    <string name="passenger">동승자</string>
+    <string name="driver">운전자</string>
+    <string name="work">업무용</string>
+    <string name="commute">출퇴근용</string>
+    <string name="app_exit_message">"\'뒤로\'버튼을 한 번 더 누르시면 앱이 종료됩니다."</string>
+    <string name="notification_error_ssl_cert_invalid">신뢰할 수 없는 페이지 입니다.\n계속 진행 하시려면 확인 버튼을 눌러주세요.</string>
+    <string name="ok">확인</string>
+    <string name="nok">취소</string>
+    <string name="do_login_for_beacon_scan">Gper 사용을 위해서는 최초 1회 로그인 해주시기 바랍니다.</string>
+    <string name="matching_success">차량과 연결에 성공했습니다.</string>
+    <string name="matching_fail">차량과 연결에 실패했습니다.\n차량 근처로 가서 다시 검색해주세요.</string>
+    <string name="usage_warning_toast">운전자의 차량 운전 용도를 선택해주세요.</string>
+    <string name="alert">안내</string>
+    <string name="EXIT">Close</string>
+    <string name="SAVE_EIXT">저장 후 종료</string>
+    <string name="retry">재시도</string>
+    <string name="already_mapping">해당 차량은 이미 다른 사용자가 사용중입니다.\n관리자에게 문의해주세요.</string>
+    <string name="emergency_call">응급 호출을 보냈습니다.</string>
+</resources>

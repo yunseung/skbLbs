@@ -236,6 +236,32 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+        bluetoothCheck();
+
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        if (mIsBound) {
+            unbindService(mServiceConnection);
+        }
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    private void bluetoothCheck() {
+        // 블루투스 지원 안함.
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext()).setTitle("BLE not supported")
+                    .setMessage(R.string.ble_not_supported);
+            builder.show();
+            return;
+        }
 
         if (CommonUtils.bluetoothOn()) {
             // 블루투스 켜져있음
@@ -245,30 +271,6 @@ public class MainActivity extends AppCompatActivity {
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
         }
-
-        // 블루투스 지원 안함.
-        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
-            Toast.makeText(this, R.string.ble_not_supported, Toast.LENGTH_SHORT).show();
-        }
-
-
-//        Log.e("MainActivity", "MainActivity onResume");
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        if (mIsBound) {
-            unbindService(mServiceConnection);
-        }
-//        Log.e("MainActivity", "MainActivity onPause");
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-//        Log.e("MainActivity", "MainActivity onStop");
-        super.onStop();
     }
 
     private void startPersistentService() {

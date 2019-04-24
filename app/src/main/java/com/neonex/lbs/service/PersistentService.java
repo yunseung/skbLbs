@@ -22,6 +22,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.neonex.lbs.LeScanPopupActivity;
+import com.neonex.lbs.MainActivity;
 import com.neonex.lbs.R;
 import com.neonex.lbs.broadcast.RestartService;
 import com.neonex.lbs.network.api.ApiService;
@@ -82,9 +83,6 @@ public class PersistentService extends Service {
         }
     }
 
-    public interface ICallback {
-        void setDetectLbsBeaconInfo(LbsBeacon beaconInfo);
-    }
 
     @Nullable
     @Override
@@ -220,10 +218,12 @@ public class PersistentService extends Service {
      */
     private void startScanning() {
         System.out.println("start scanning");
-        if (mBtScanner == null) {
-            mBtScanner = mBtAdapter.getBluetoothLeScanner();
+        if (mBtScanner != null) {
+            mBtScanner.startScan(mLeScanCallback);
+        } else {
+            //TODO 흠....
         }
-        mBtScanner.startScan(mLeScanCallback);
+
     }
 
     /**

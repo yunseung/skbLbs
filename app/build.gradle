@@ -7,14 +7,33 @@ android {
         applicationId "com.neonex.lbs"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 4
-        versionName "1.1.2"
+        versionCode 6
+        versionName "1.1.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file(SIGNED_STORE_FILE)   // gradle.properties 파일 참조 앱 빌드키
+            storePassword SIGNED_STORE_PASSWORD // gradle.properties 파일 참조 앱 빌드키
+            keyAlias SIGNED_KEY_ALIAS           // gradle.properties 파일 참조 앱 빌드키
+            keyPassword SIGNED_KEY_PASSWORD     // gradle.properties 파일 참조 앱 빌드키
+            v1SigningEnabled true               // 앱빌드 방식 필수 값
+            v2SigningEnabled true               // 앱빌드 방식 필수 값
+        }
+    }
+
+    //여기서 생성된 앱의 이름을 바꿔준다
+    def formattedDate = new Date().format('yyyyMMdd_HHmm')
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            outputFileName = "skb_lbs_${variant.name}_${variant.versionName}_${formattedDate}.apk"
         }
     }
 }

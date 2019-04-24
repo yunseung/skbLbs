@@ -11,12 +11,6 @@ android {
         versionName "1.1.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
 
     signingConfigs {
         release {
@@ -26,6 +20,44 @@ android {
             keyPassword SIGNED_KEY_PASSWORD     // gradle.properties 파일 참조 앱 빌드키
             v1SigningEnabled true               // 앱빌드 방식 필수 값
             v2SigningEnabled true               // 앱빌드 방식 필수 값
+        }
+    }
+
+    buildTypes {
+
+        release {
+            signingConfig signingConfigs.release    // 빌드 키 이용
+            minifyEnabled false                     // 소스 축소
+            zipAlignEnabled true                    // 스토어 올리기위한 zip 정렬
+
+            //하단 부터 Build Variant에서 빌드선택후 빌드 하면 BuildConfig.Java파일에 변수가 생성됨.
+            buildConfigField "boolean", "IS_DEV",  "false"
+            buildConfigField "boolean", "IS_TEST",  "false"
+            buildConfigField "boolean", "IS_MDM_USE", "true"
+            buildConfigField "String",  "WEB_URL",  "\"https://ods.ibkc.co.kr\""
+            buildConfigField "String",  "APPIRON_URL", "\"https://apprn.ibkc.co.kr/authCheck.call\""
+        }
+
+        ttest {
+            signingConfig signingConfigs.release
+
+            //하단 부터 Build Variant에서 빌드선택후 빌드 하면 BuildConfig.Java파일에 변수가 생성됨
+            buildConfigField "boolean", "IS_DEV", "false"
+            buildConfigField "boolean", "IS_TEST", "true"
+            buildConfigField "boolean", "IS_MDM_USE", "true"
+            buildConfigField "String", "WEB_URL", "\"https://odst.ibkc.co.kr:444\""
+            buildConfigField "String", "APPIRON_URL", "\"https://apprnt.ibkc.co.kr:444/authCheck.call\""
+        }
+
+        debug{
+            signingConfig signingConfigs.release
+
+            //하단 부터 Build Variant에서 빌드선택후 빌드 하면 BuildConfig.Java파일에 변수가 생성됨
+            buildConfigField "boolean", "IS_DEV",  "true"
+            buildConfigField "boolean", "IS_TEST",  "false"
+            buildConfigField "boolean", "IS_MDM_USE", "false"
+            buildConfigField "String",  "WEB_URL",  "\"https://odsd.ibkc.co.kr:8080\""
+            buildConfigField "String",  "APPIRON_URL", "\"https://apprnd.ibkc.co.kr:8080/authCheck.call\""
         }
     }
 

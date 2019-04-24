@@ -220,6 +220,9 @@ public class PersistentService extends Service {
      */
     private void startScanning() {
         System.out.println("start scanning");
+        if (mBtScanner == null) {
+            mBtScanner = mBtAdapter.getBluetoothLeScanner();
+        }
         mBtScanner.startScan(mLeScanCallback);
     }
 

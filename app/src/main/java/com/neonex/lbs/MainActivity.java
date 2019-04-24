@@ -239,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (CommonUtils.bluetoothOn()) {
             // 블루투스 켜져있음
+            startPersistentService();
         } else {
             // 블루투스 꺼져있으니 켜라는 팝업.
             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
@@ -250,18 +251,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, R.string.ble_not_supported, Toast.LENGTH_SHORT).show();
         }
 
-        try {
-            IntentFilter mainFilter = new IntentFilter("com.neonex.lbs.BeaconService.ssss");
 
-            registerReceiver(mBroadcastReceiver, mainFilter);
-
-            // start service
-            Intent serviceIntent = new Intent(this, PersistentService.class);
-            startService(serviceIntent);
-            mIsBound = bindService(serviceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 //        Log.e("MainActivity", "MainActivity onResume");
         super.onResume();
     }
@@ -279,6 +269,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
 //        Log.e("MainActivity", "MainActivity onStop");
         super.onStop();
+    }
+
+    private void startPersistentService() {
+        try {
+            IntentFilter mainFilter = new IntentFilter("com.neonex.lbs.BeaconService.ssss");
+
+            registerReceiver(mBroadcastReceiver, mainFilter);
+
+            // start service
+            Intent serviceIntent = new Intent(this, PersistentService.class);
+            startService(serviceIntent);
+            mIsBound = bindService(serviceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     final class SkbLbsWebChromeClient extends WebChromeClient {
@@ -536,10 +541,10 @@ public class MainActivity extends AppCompatActivity {
             case REQUEST_ENABLE_BT:
                 if (resultCode == RESULT_OK) {
                     // 사용자가 블루투스 팝업을 통해 블루투스를 켬.
-//                    Log.e("블루투스", "On");
+                    startPersistentService();
                 } else {
                     // 사용자가 블루투스 팝업을 무시하거나 블루투스를 켜지 않음.
-//                    Log.e("블루투스", "Off");
+                    Toast.makeText(getApplicationContext(), "기기의 Bluetooth 를 켜지 않으면\nskbLbs 앱의 기능을 사용할 수 없습니다.", Toast.LENGTH_SHORT).show();
                 }
                 break;
             case 100:
